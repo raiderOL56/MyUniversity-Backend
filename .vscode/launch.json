@@ -1,0 +1,31 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": ".NET Core Launch - Microsoft Edge",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "requireExactSource": false,
+            "program": "${workspaceFolder}/University-Backend/bin/Debug/net6.0/University-Backend.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "stopAtEntry": false,
+            "internalConsoleOptions": "openOnSessionStart",
+            "launchBrowser": {
+              "enabled": true,
+              "args": "${auto-detect-url}",
+              "windows": {
+                "command": "cmd.exe",
+                "args": "/C start \"\" \"C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe\" ${auto-detect-url}/Swagger"
+              }
+            },
+            "env": {
+              "ASPNETCORE_ENVIRONMENT": "Development",
+            },
+            "sourceFileMap": {
+              "/Views": "${workspaceFolder}/Views"
+            }
+          }
+    ]
+}
