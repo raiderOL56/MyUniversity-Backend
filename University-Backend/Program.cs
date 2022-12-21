@@ -23,6 +23,16 @@ builder.Services.AddVersionedApiExplorer(setup =>
 });
 // VERSION CONTROL => 4.- Configure options
 builder.Services.ConfigureOptions<SwaggerOptions>();
+// CORS => 1.- Add configuration
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: "_myAlllowSpecificOrigins", policy =>
+    {
+        policy.WithOrigins("http://localhost:5000", "https://localhost:5000");
+        policy.WithMethods("GET", "POST", "PUT", "DELETE");
+        policy.AllowAnyHeader();
+    });
+});
 
 var app = builder.Build();
 
@@ -46,6 +56,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+// CORS => 2.- Add service CORS | IMPORTANTE: Colocar siempre antes de app.UseAuthorization
+app.UseCors("_myAlllowSpecificOrigins");
 app.UseAuthorization();
 
 app.MapControllers();
