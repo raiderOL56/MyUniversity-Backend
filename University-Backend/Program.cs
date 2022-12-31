@@ -1,11 +1,19 @@
+using Microsoft.EntityFrameworkCore; // EF => 1.- Usings to work whit EF
+using University_Backend.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+builder.Configuration.AddJsonFile("University-Backend/appsettings.json");
 
+// Add services to the container.
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+// EF => 2.- Get connection string
+string? connectionString = builder.Configuration.GetConnectionString("UniversityDB");
+// EF => 3.- Database connection
+builder.Services.AddDbContext<UniversityContext>(options => options.UseSqlServer(connectionString));
+
 
 var app = builder.Build();
 
