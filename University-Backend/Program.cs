@@ -3,15 +3,15 @@ using University_Backend.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Configuration.AddJsonFile("University-Backend/appsettings.json");
+IConfiguration configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build(); // EF => 2.- Create object to get appsettings.json
 
 // Add services to the container.
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-// EF => 2.- Get connection string
-string? connectionString = builder.Configuration.GetConnectionString("UniversityDB");
-// EF => 3.- Database connection
+// EF => 3.- Get connection string
+string? connectionString = configuration.GetConnectionString("UniversityDB");
+// EF => 4.- Database connection
 builder.Services.AddDbContext<UniversityContext>(options => options.UseSqlServer(connectionString));
 
 
