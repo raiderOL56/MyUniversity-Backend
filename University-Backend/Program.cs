@@ -2,9 +2,12 @@ using Microsoft.AspNetCore.Mvc; // VERSION CONTROL => 1.1.- Usings to work with 
 using Microsoft.AspNetCore.Mvc.ApiExplorer; // VERSION CONTROL => 1.2.- Usings to work with Version Control
 using Microsoft.OpenApi.Models;
 using University_Backend.Services;
+using Microsoft.EntityFrameworkCore; // EF => 1.- Usings to work whit EF
+using University_Backend.Data;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Configuration.AddJsonFile("University-Backend/appsettings.json").Build();
+
+IConfiguration configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build(); // EF => 2.- Create object to get appsettings.json
 
 // Add services to the container.
 builder.Services.AddControllers();
@@ -36,7 +39,7 @@ builder.Services.AddCors(options =>
     });
 });
 // JWT => 1.- Add service of JWT Authorization
-builder.Services.AddJwtService(builder.Configuration);
+builder.Services.AddJwtService(configuration);
 // JWT => 2.- Add Authorization
 builder.Services.AddAuthorization(options =>
 {
@@ -69,6 +72,11 @@ builder.Services.AddSwaggerGen(options =>
         }
     });
 });
+// EF => 3.- Get connection string
+string? connectionString = configuration.GetConnectionString("UniversityDB");
+// EF => 4.- Database connection
+builder.Services.AddDbContext<UniversityContext>(options => options.UseSqlServer(connectionString));
+
 
 var app = builder.Build();
 
