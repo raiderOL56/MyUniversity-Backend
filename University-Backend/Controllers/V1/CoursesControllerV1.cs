@@ -7,55 +7,55 @@ namespace University_Backend.Controllers_V1
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
-    public class ChaptersV1Controller : ControllerBase
+    public class CoursesController : ControllerBase
     {
         private readonly UniversityContext _context;
 
-        public ChaptersV1Controller(UniversityContext context)
+        public CoursesController(UniversityContext context)
         {
             _context = context;
         }
 
-        // GET: api/ChaptersV1
+        // GET: api/CoursesV1
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Chapter>>> GetChapters()
+        public async Task<ActionResult<IEnumerable<Course>>> GetCourses()
         {
-          if (_context.Chapters == null)
+          if (_context.Courses == null)
           {
               return NotFound();
           }
-            return await _context.Chapters.ToListAsync();
+            return await _context.Courses.ToListAsync();
         }
 
-        // GET: api/ChaptersV1/5
+        // GET: api/CoursesV1/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Chapter>> GetChapter(int id)
+        public async Task<ActionResult<Course>> GetCourse(int id)
         {
-          if (_context.Chapters == null)
+          if (_context.Courses == null)
           {
               return NotFound();
           }
-            var chapter = await _context.Chapters.FindAsync(id);
+            var course = await _context.Courses.FindAsync(id);
 
-            if (chapter == null)
+            if (course == null)
             {
                 return NotFound();
             }
 
-            return chapter;
+            return course;
         }
 
-        // PUT: api/ChaptersV1/5
+        // PUT: api/CoursesV1/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutChapter(int id, Chapter chapter)
+        public async Task<IActionResult> PutCourse(int id, Course course)
         {
-            if (id != chapter.Id)
+            if (id != course.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(chapter).State = EntityState.Modified;
+            _context.Entry(course).State = EntityState.Modified;
 
             try
             {
@@ -63,7 +63,7 @@ namespace University_Backend.Controllers_V1
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ChapterExists(id))
+                if (!CourseExists(id))
                 {
                     return NotFound();
                 }
@@ -76,44 +76,44 @@ namespace University_Backend.Controllers_V1
             return NoContent();
         }
 
-        // POST: api/ChaptersV1
+        // POST: api/CoursesV1
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Chapter>> PostChapter(Chapter chapter)
+        public async Task<ActionResult<Course>> PostCourse(Course course)
         {
-          if (_context.Chapters == null)
+          if (_context.Courses == null)
           {
-              return Problem("Entity set 'UniversityContext.Chapters'  is null.");
+              return Problem("Entity set 'UniversityContext.Courses'  is null.");
           }
-            _context.Chapters.Add(chapter);
+            _context.Courses.Add(course);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetChapter", new { id = chapter.Id }, chapter);
+            return CreatedAtAction("GetCourse", new { id = course.Id }, course);
         }
 
-        // DELETE: api/ChaptersV1/5
+        // DELETE: api/CoursesV1/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteChapter(int id)
+        public async Task<IActionResult> DeleteCourse(int id)
         {
-            if (_context.Chapters == null)
+            if (_context.Courses == null)
             {
                 return NotFound();
             }
-            var chapter = await _context.Chapters.FindAsync(id);
-            if (chapter == null)
+            var course = await _context.Courses.FindAsync(id);
+            if (course == null)
             {
                 return NotFound();
             }
 
-            _context.Chapters.Remove(chapter);
+            _context.Courses.Remove(course);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool ChapterExists(int id)
+        private bool CourseExists(int id)
         {
-            return (_context.Chapters?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Courses?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }
