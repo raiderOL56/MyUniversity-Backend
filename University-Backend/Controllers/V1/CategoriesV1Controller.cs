@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using University_Backend.Data;
@@ -10,18 +5,18 @@ using University_Backend.Models.Data;
 
 namespace University_Backend.Controllers_V1
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
-    public class CategoriesControllerV1 : ControllerBase
+    public class CategoriesV1Controller : ControllerBase
     {
         private readonly UniversityContext _context;
 
-        public CategoriesControllerV1(UniversityContext context)
+        public CategoriesV1Controller(UniversityContext context)
         {
             _context = context;
         }
 
-        // GET: api/CategoriesControllerV1
+        // GET: api/CategoriesV1
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Category>>> GetCategories()
         {
@@ -32,7 +27,7 @@ namespace University_Backend.Controllers_V1
             return await _context.Categories.ToListAsync();
         }
 
-        // GET: api/CategoriesControllerV1/5
+        // GET: api/CategoriesV1/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Category>> GetCategory(int id)
         {
@@ -50,7 +45,7 @@ namespace University_Backend.Controllers_V1
             return category;
         }
 
-        // PUT: api/CategoriesControllerV1/5
+        // PUT: api/CategoriesV1/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutCategory(int id, Category category)
@@ -81,7 +76,7 @@ namespace University_Backend.Controllers_V1
             return NoContent();
         }
 
-        // POST: api/CategoriesControllerV1
+        // POST: api/CategoriesV1
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<Category>> PostCategory(Category category)
@@ -96,7 +91,7 @@ namespace University_Backend.Controllers_V1
             return CreatedAtAction("GetCategory", new { id = category.Id }, category);
         }
 
-        // DELETE: api/CategoriesControllerV1/5
+        // DELETE: api/CategoriesV1/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCategory(int id)
         {

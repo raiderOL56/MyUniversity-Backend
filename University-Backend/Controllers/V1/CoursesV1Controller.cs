@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using University_Backend.Data;
@@ -10,18 +5,18 @@ using University_Backend.Models.Data;
 
 namespace University_Backend.Controllers_V1
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
-    public class CoursesControllerV1 : ControllerBase
+    public class CoursesV1Controller : ControllerBase
     {
         private readonly UniversityContext _context;
 
-        public CoursesControllerV1(UniversityContext context)
+        public CoursesV1Controller(UniversityContext context)
         {
             _context = context;
         }
 
-        // GET: api/CoursesControllerV1
+        // GET: api/CoursesV1
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Course>>> GetCourses()
         {
@@ -32,7 +27,7 @@ namespace University_Backend.Controllers_V1
             return await _context.Courses.ToListAsync();
         }
 
-        // GET: api/CoursesControllerV1/5
+        // GET: api/CoursesV1/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Course>> GetCourse(int id)
         {
@@ -50,7 +45,7 @@ namespace University_Backend.Controllers_V1
             return course;
         }
 
-        // PUT: api/CoursesControllerV1/5
+        // PUT: api/CoursesV1/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutCourse(int id, Course course)
@@ -81,7 +76,7 @@ namespace University_Backend.Controllers_V1
             return NoContent();
         }
 
-        // POST: api/CoursesControllerV1
+        // POST: api/CoursesV1
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<Course>> PostCourse(Course course)
@@ -96,7 +91,7 @@ namespace University_Backend.Controllers_V1
             return CreatedAtAction("GetCourse", new { id = course.Id }, course);
         }
 
-        // DELETE: api/CoursesControllerV1/5
+        // DELETE: api/CoursesV1/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCourse(int id)
         {

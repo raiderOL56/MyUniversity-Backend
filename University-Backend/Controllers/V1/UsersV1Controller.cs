@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using University_Backend.Data;
@@ -10,18 +5,18 @@ using University_Backend.Models.Data;
 
 namespace University_Backend.Controllers_V1
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
-    public class UsersControllerV1 : ControllerBase
+    public class UsersV1Controller : ControllerBase
     {
         private readonly UniversityContext _context;
 
-        public UsersControllerV1(UniversityContext context)
+        public UsersV1Controller(UniversityContext context)
         {
             _context = context;
         }
 
-        // GET: api/UsersControllerV1
+        // GET: api/UsersV1
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
@@ -32,7 +27,7 @@ namespace University_Backend.Controllers_V1
             return await _context.Users.ToListAsync();
         }
 
-        // GET: api/UsersControllerV1/5
+        // GET: api/UsersV1/5
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> GetUser(int id)
         {
@@ -50,7 +45,7 @@ namespace University_Backend.Controllers_V1
             return user;
         }
 
-        // PUT: api/UsersControllerV1/5
+        // PUT: api/UsersV1/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutUser(int id, User user)
@@ -81,7 +76,7 @@ namespace University_Backend.Controllers_V1
             return NoContent();
         }
 
-        // POST: api/UsersControllerV1
+        // POST: api/UsersV1
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<User>> PostUser(User user)
@@ -96,7 +91,7 @@ namespace University_Backend.Controllers_V1
             return CreatedAtAction("GetUser", new { id = user.Id }, user);
         }
 
-        // DELETE: api/UsersControllerV1/5
+        // DELETE: api/UsersV1/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser(int id)
         {
