@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using University_Backend.Data;
@@ -10,18 +5,18 @@ using University_Backend.Models.Data;
 
 namespace University_Backend.Controllers_V1
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
-    public class ChaptersControllerV1 : ControllerBase
+    public class ChaptersV1Controller : ControllerBase
     {
         private readonly UniversityContext _context;
 
-        public ChaptersControllerV1(UniversityContext context)
+        public ChaptersV1Controller(UniversityContext context)
         {
             _context = context;
         }
 
-        // GET: api/ChaptersControllerV1
+        // GET: api/ChaptersV1
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Chapter>>> GetChapters()
         {
@@ -32,7 +27,7 @@ namespace University_Backend.Controllers_V1
             return await _context.Chapters.ToListAsync();
         }
 
-        // GET: api/ChaptersControllerV1/5
+        // GET: api/ChaptersV1/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Chapter>> GetChapter(int id)
         {
@@ -50,7 +45,7 @@ namespace University_Backend.Controllers_V1
             return chapter;
         }
 
-        // PUT: api/ChaptersControllerV1/5
+        // PUT: api/ChaptersV1/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutChapter(int id, Chapter chapter)
@@ -81,7 +76,7 @@ namespace University_Backend.Controllers_V1
             return NoContent();
         }
 
-        // POST: api/ChaptersControllerV1
+        // POST: api/ChaptersV1
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<Chapter>> PostChapter(Chapter chapter)
@@ -96,7 +91,7 @@ namespace University_Backend.Controllers_V1
             return CreatedAtAction("GetChapter", new { id = chapter.Id }, chapter);
         }
 
-        // DELETE: api/ChaptersControllerV1/5
+        // DELETE: api/ChaptersV1/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteChapter(int id)
         {

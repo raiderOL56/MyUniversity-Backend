@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using University_Backend.Data;
@@ -10,18 +5,18 @@ using University_Backend.Models.Data;
 
 namespace University_Backend.Controllers_V1
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
-    public class StudentsControllerV1 : ControllerBase
+    public class StudentsV1Controller : ControllerBase
     {
         private readonly UniversityContext _context;
 
-        public StudentsControllerV1(UniversityContext context)
+        public StudentsV1Controller(UniversityContext context)
         {
             _context = context;
         }
 
-        // GET: api/StudentsControllerV1
+        // GET: api/StudentsV1
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Student>>> GetStudents()
         {
@@ -32,7 +27,7 @@ namespace University_Backend.Controllers_V1
             return await _context.Students.ToListAsync();
         }
 
-        // GET: api/StudentsControllerV1/5
+        // GET: api/StudentsV1/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Student>> GetStudent(int id)
         {
@@ -50,7 +45,7 @@ namespace University_Backend.Controllers_V1
             return student;
         }
 
-        // PUT: api/StudentsControllerV1/5
+        // PUT: api/StudentsV1/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutStudent(int id, Student student)
@@ -81,7 +76,7 @@ namespace University_Backend.Controllers_V1
             return NoContent();
         }
 
-        // POST: api/StudentsControllerV1
+        // POST: api/StudentsV1
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<Student>> PostStudent(Student student)
@@ -96,7 +91,7 @@ namespace University_Backend.Controllers_V1
             return CreatedAtAction("GetStudent", new { id = student.Id }, student);
         }
 
-        // DELETE: api/StudentsControllerV1/5
+        // DELETE: api/StudentsV1/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteStudent(int id)
         {
