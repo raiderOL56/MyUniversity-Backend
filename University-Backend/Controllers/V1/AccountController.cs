@@ -1,3 +1,4 @@
+using System.Reflection.Metadata.Ecma335;
 using System.Net;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -51,6 +52,12 @@ namespace University_Backend.Controllers.V1
         public string SaludarUsuario()
         {
             return "Hola, usuario";
+        }
+
+        [HttpGet]
+        public string SaludarInvitado()
+        {
+            return "Hola, invitado";
         }
     }
 }
