@@ -5,7 +5,8 @@ using University_Backend.Models.Data;
 
 namespace University_Backend.Controllers_V1
 {
-    [Route("api/[controller]/[action]")]
+    [ApiVersion("1.0")]
+    [Route("api/v{version:apiVersion}/[controller]/[action]")]
     [ApiController]
     public class ChaptersController : ControllerBase
     {
@@ -18,6 +19,7 @@ namespace University_Backend.Controllers_V1
 
         // GET: api/ChaptersV1
         [HttpGet]
+        [MapToApiVersion("1.0")]
         public async Task<ActionResult<IEnumerable<Chapter>>> GetChapters()
         {
           if (_context.Chapters == null)
@@ -29,6 +31,7 @@ namespace University_Backend.Controllers_V1
 
         // GET: api/ChaptersV1/5
         [HttpGet("{id}")]
+        [MapToApiVersion("1.0")]
         public async Task<ActionResult<Chapter>> GetChapter(int id)
         {
           if (_context.Chapters == null)
@@ -48,6 +51,7 @@ namespace University_Backend.Controllers_V1
         // PUT: api/ChaptersV1/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
+        [MapToApiVersion("1.0")]
         public async Task<IActionResult> PutChapter(int id, Chapter chapter)
         {
             if (id != chapter.Id)
@@ -79,6 +83,7 @@ namespace University_Backend.Controllers_V1
         // POST: api/ChaptersV1
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
+        [MapToApiVersion("1.0")]
         public async Task<ActionResult<Chapter>> PostChapter(Chapter chapter)
         {
           if (_context.Chapters == null)
@@ -93,6 +98,7 @@ namespace University_Backend.Controllers_V1
 
         // DELETE: api/ChaptersV1/5
         [HttpDelete("{id}")]
+        [MapToApiVersion("1.0")]
         public async Task<IActionResult> DeleteChapter(int id)
         {
             if (_context.Chapters == null)

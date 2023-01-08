@@ -5,7 +5,8 @@ using University_Backend.Models.Data;
 
 namespace University_Backend.Controllers_V1
 {
-    [Route("api/[controller]/[action]")]
+    [ApiVersion("1.0")]
+    [Route("api/v{version:apiVersion}/[controller]/[action]")]
     [ApiController]
     public class CoursesController : ControllerBase
     {
@@ -18,6 +19,7 @@ namespace University_Backend.Controllers_V1
 
         // GET: api/CoursesV1
         [HttpGet]
+        [MapToApiVersion("1.0")]
         public async Task<ActionResult<IEnumerable<Course>>> GetCourses()
         {
           if (_context.Courses == null)
@@ -29,6 +31,7 @@ namespace University_Backend.Controllers_V1
 
         // GET: api/CoursesV1/5
         [HttpGet("{id}")]
+        [MapToApiVersion("1.0")]
         public async Task<ActionResult<Course>> GetCourse(int id)
         {
           if (_context.Courses == null)
@@ -48,6 +51,7 @@ namespace University_Backend.Controllers_V1
         // PUT: api/CoursesV1/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
+        [MapToApiVersion("1.0")]
         public async Task<IActionResult> PutCourse(int id, Course course)
         {
             if (id != course.Id)
@@ -79,6 +83,7 @@ namespace University_Backend.Controllers_V1
         // POST: api/CoursesV1
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
+        [MapToApiVersion("1.0")]
         public async Task<ActionResult<Course>> PostCourse(Course course)
         {
           if (_context.Courses == null)
@@ -93,6 +98,7 @@ namespace University_Backend.Controllers_V1
 
         // DELETE: api/CoursesV1/5
         [HttpDelete("{id}")]
+        [MapToApiVersion("1.0")]
         public async Task<IActionResult> DeleteCourse(int id)
         {
             if (_context.Courses == null)

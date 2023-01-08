@@ -1,4 +1,3 @@
-using System.Net;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
@@ -8,8 +7,9 @@ using University_Backend.Models.JWT;
 
 namespace University_Backend.Controllers.V1
 {
+    [ApiVersion("1.0")]
+    [Route("api/v{version:apiVersion}/[controller]/[action]")]
     [ApiController]
-    [Route("api/[controller]/[action]")]
     public class AccountController : ControllerBase
     {
         private readonly JwtSettings _jwtSettins;
@@ -19,6 +19,7 @@ namespace University_Backend.Controllers.V1
         }
 
         [HttpPost]
+        [MapToApiVersion("1.0")]
         public IActionResult GetToken(AccountUser accountUser)
         {
             try
@@ -40,6 +41,7 @@ namespace University_Backend.Controllers.V1
         }
 
         [HttpGet]
+        [MapToApiVersion("1.0")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Administrator")]
         public string SaludarAdmin()
         {
@@ -47,6 +49,7 @@ namespace University_Backend.Controllers.V1
         }
 
         [HttpGet]
+        [MapToApiVersion("1.0")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Administrator, User")]
         public string SaludarUsuario()
         {

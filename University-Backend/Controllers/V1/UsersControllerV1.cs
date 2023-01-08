@@ -5,7 +5,8 @@ using University_Backend.Models.Data;
 
 namespace University_Backend.Controllers_V1
 {
-    [Route("api/[controller]/[action]")]
+    [ApiVersion("1.0")]
+    [Route("api/v{version:apiVersion}/[controller]/[action]")]
     [ApiController]
     public class UsersController : ControllerBase
     {
@@ -18,6 +19,7 @@ namespace University_Backend.Controllers_V1
 
         // GET: api/UsersV1
         [HttpGet]
+        [MapToApiVersion("1.0")]
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
           if (_context.Users == null)
@@ -29,6 +31,7 @@ namespace University_Backend.Controllers_V1
 
         // GET: api/UsersV1/5
         [HttpGet("{id}")]
+        [MapToApiVersion("1.0")]
         public async Task<ActionResult<User>> GetUser(int id)
         {
           if (_context.Users == null)
@@ -48,6 +51,7 @@ namespace University_Backend.Controllers_V1
         // PUT: api/UsersV1/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
+        [MapToApiVersion("1.0")]
         public async Task<IActionResult> PutUser(int id, User user)
         {
             if (id != user.Id)
@@ -79,6 +83,7 @@ namespace University_Backend.Controllers_V1
         // POST: api/UsersV1
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
+        [MapToApiVersion("1.0")]
         public async Task<ActionResult<User>> PostUser(User user)
         {
           if (_context.Users == null)
@@ -93,6 +98,7 @@ namespace University_Backend.Controllers_V1
 
         // DELETE: api/UsersV1/5
         [HttpDelete("{id}")]
+        [MapToApiVersion("1.0")]
         public async Task<IActionResult> DeleteUser(int id)
         {
             if (_context.Users == null)
