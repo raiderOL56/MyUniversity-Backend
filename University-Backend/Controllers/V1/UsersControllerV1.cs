@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using University_Backend.Data;
 using University_Backend.Models.Data;
 
@@ -20,6 +22,7 @@ namespace University_Backend.Controllers_V1
         // GET: api/UsersV1
         [HttpGet]
         [MapToApiVersion("1.0")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Administrator")]
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
           if (_context.Users == null)
@@ -32,6 +35,7 @@ namespace University_Backend.Controllers_V1
         // GET: api/UsersV1/5
         [HttpGet("{id}")]
         [MapToApiVersion("1.0")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Administrator")]
         public async Task<ActionResult<User>> GetUser(int id)
         {
           if (_context.Users == null)
@@ -52,6 +56,7 @@ namespace University_Backend.Controllers_V1
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         [MapToApiVersion("1.0")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Administrator")]
         public async Task<IActionResult> PutUser(int id, User user)
         {
             if (id != user.Id)
@@ -84,6 +89,7 @@ namespace University_Backend.Controllers_V1
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         [MapToApiVersion("1.0")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Administrator")]
         public async Task<ActionResult<User>> PostUser(User user)
         {
           if (_context.Users == null)
@@ -99,6 +105,7 @@ namespace University_Backend.Controllers_V1
         // DELETE: api/UsersV1/5
         [HttpDelete("{id}")]
         [MapToApiVersion("1.0")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Administrator")]
         public async Task<IActionResult> DeleteUser(int id)
         {
             if (_context.Users == null)

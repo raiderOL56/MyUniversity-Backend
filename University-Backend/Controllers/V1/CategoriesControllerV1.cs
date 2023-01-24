@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using University_Backend.Data;
 using University_Backend.Models.Data;
 
@@ -20,6 +22,7 @@ namespace University_Backend.Controllers_V1
         // GET: api/CategoriesV1
         [HttpGet]
         [MapToApiVersion("1.0")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Administrator, User")]
         public async Task<ActionResult<IEnumerable<Category>>> GetCategories()
         {
           if (_context.Categories == null)
@@ -32,6 +35,7 @@ namespace University_Backend.Controllers_V1
         // GET: api/CategoriesV1/5
         [HttpGet("{id}")]
         [MapToApiVersion("1.0")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Administrator, User")]
         public async Task<ActionResult<Category>> GetCategory(int id)
         {
           if (_context.Categories == null)
@@ -52,6 +56,7 @@ namespace University_Backend.Controllers_V1
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         [MapToApiVersion("1.0")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Administrator")]
         public async Task<IActionResult> PutCategory(int id, Category category)
         {
             if (id != category.Id)
@@ -84,6 +89,7 @@ namespace University_Backend.Controllers_V1
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         [MapToApiVersion("1.0")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Administrator")]
         public async Task<ActionResult<Category>> PostCategory(Category category)
         {
           if (_context.Categories == null)
@@ -99,6 +105,7 @@ namespace University_Backend.Controllers_V1
         // DELETE: api/CategoriesV1/5
         [HttpDelete("{id}")]
         [MapToApiVersion("1.0")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Administrator")]
         public async Task<IActionResult> DeleteCategory(int id)
         {
             if (_context.Categories == null)

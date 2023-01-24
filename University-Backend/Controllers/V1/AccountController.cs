@@ -55,5 +55,11 @@ namespace University_Backend.Controllers.V1
         {
             return "Hola, usuario";
         }
+
+        [HttpGet]
+        public string SaludarInvitado()
+        {
+            return "Hola, invitado";
+        }
     }
 }
